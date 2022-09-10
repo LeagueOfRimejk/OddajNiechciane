@@ -1,0 +1,115 @@
+{% extends 'MyApp/__base__.html' %}
+{% block content %}
+
+    <style>
+          div.slogan form {
+            display: flex;
+            margin: auto;
+            box-sizing: border-box;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        div.slogan.container {
+            display: flex;
+            align-items: start;
+
+            width: 50%;
+        }
+        div.slogan--item {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            flex-direction: column;
+        }
+
+        div#user-profile-modify {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        div.slogan form label {
+            font-size: 2.1rem;
+            margin-top: 10px;
+        }
+
+        div.slogan form input[type=text], input[type=email], input[type=password] {
+            margin: 10px 0;
+            height: 40px;
+            font-size: 2.2rem;
+            padding: 10px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 300;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid black;
+        }
+
+        div.slogan form input[type=submit] {
+
+            margin-top: 20px;
+            width: 30%;
+            height: 50px;
+            background: transparent;
+            font-size: 1.4rem;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+
+    </style>
+
+    {% include 'MyApp/components/navbar_component.html' %}
+
+        <div class="slogan container container--90">
+                <form method="POST">
+                {% csrf_token %}
+                <div id="user-profile-modify">
+                    <div class="slogan--item">
+                      <h1>
+                        Zmień hasło
+                      </h1>
+                    </div>
+
+                    <div class="slogan--item">
+
+                            <label for="">Stare hasło</label>
+                                <input type="password" name="old_password">
+                            <label for="">Nowe hasło</label>
+                                <input type="password" name="new_password">
+                            <label for="">Powtórz hasło</label>
+                                <input type="password" name="new_password2">
+
+                            <input type="submit" value="Zmień">
+
+                    </div>
+                </div>
+
+
+                <div id="user-profile-modify">
+                    <div class="slogan--item">
+                      <h1>
+                        Aktualizuj swój profil
+                      </h1>
+                    </div>
+
+
+                    <div class="slogan--item">
+
+                            <label for="">Nazwisko</label>
+                                <input type="text" name="last_name" value="{{ request.user.last_name }}">
+                            <label for="">Imie</label>
+                                <input type="text" name="first_name" value="{{ request.user.first_name }}">
+                            <label for="">Email</label>
+                                <input type="email" name="email" value="{{ request.user.email }}">
+
+                            <input type="submit" value="Zapisz">
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </form>
+
+{% endblock %}

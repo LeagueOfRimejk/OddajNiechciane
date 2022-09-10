@@ -1,0 +1,20 @@
+{% extends 'MyApp/__base__.html' %}
+
+{% block content %}
+    {% include 'MyApp/components/navbar_component.html' %}
+    <div class="slogan container container--90">
+        <div class="slogan--item">
+            {% if messages %}
+                <h2>
+
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+
+                </h2>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+

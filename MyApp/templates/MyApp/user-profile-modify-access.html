@@ -1,0 +1,37 @@
+{% extends 'MyApp/__base__.html' %}
+{% block content %}
+    {% include 'MyApp/components/navbar_component.html' %}
+
+    <style>
+        div.slogan.container {
+            align-items: start;
+        }
+        div.slogan.container form input{
+            width: 25%;
+            margin: auto;
+            height: 50px;
+            font-size: 2.1rem;
+            padding: 10px;
+            outline: none;
+            border: none;
+            border-bottom: 1px black solid;
+        }
+
+    </style>
+
+    <div class="slogan container container--90">
+        <div class="slogan--item">
+            <h1>
+                Podaj hasło
+            </h1>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="password" name="password">
+            </form>
+
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'MyApp/__base__.html' %}
+    {% load static %}
+    {% block content %}
+        <style>
+
+            footer {
+                z-index: -1;
+                background-image: url({% static 'static/MyApp/images/header-bg.jpg' %});
+                background-position: -50vw;
+            }
+
+            div.contact {
+                display: none;
+            }
+
+            div.bottom-line {
+                display: none;
+            }
+
+            .user-donations-button {
+                border: black 1px solid;
+                padding: 15px;
+                background: transparent;
+                cursor: pointer;
+            }
+
+        </style>
+
+        {% include 'MyApp/components/navbar_component.html' %}
+
+
+        <div class="slogan container container--90" style="justify-content: start; flex-direction: column;">
+            <div class="slogan--item">
+                <h1>
+                    Twoje Darowizny
+                </h1>
+            </div>
+
+            <form id="filter-donation" action="">
+                <div style="font-size: 1.8rem; padding: 5px; margin-bottom: 10px">
+                    <button type="submit" class="user-donations-button" value="1" name="search">Odebrane</button>
+                    <button type="submit" class="user-donations-button" value="0" name="search">Nieodebrane</button>
+                    <a href="{% url 'user-donations' %}"><button class="user-donations-button">Wszystkie</button></a>
+                </div>
+            </form>
+
+
+            {% for donation in donations %}
+                <div class="slogan--item" style="border: black 1px solid; margin-top: 10px; position: relative">
+                    <h1>
+                        {{ donation.institution.name }}
+
+                    </h1>
+
+                    <div style="position: absolute; text-align: right;right: 10px; top: 10px; font-size: 2.2rem">Status<br>{{ donation.get_is_taken_display }}</div>
+
+
+                    {% if donation.is_taken == 0 %}
+                        <form id="archive-donation" action="" method="POST" style="position: absolute; top: 10px; left: 10px">
+                            {% csrf_token %}
+                            <button type="submit" name="donation" value="{{ donation.pk }}" class="user-donations-button" style="font-size: 1.5rem">Archiwizuj</button>
+                        </form>
+                    {% endif %}
+
+                    <div style="display: flex; justify-content: space-between; font-size: 2.0rem; padding: 0 10px">
+                        <span>Liczba workow</span>
+                        <span>Kategorie</span>
+                        {% if donation.is_taken != 1 %}<span>Data odbioru</span>{% else %}<span>Odebrano dnia</span>{% endif %}
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; font-size: 1.6rem; padding: 10px 20px 10px 20px">
+                        <span>{{ donation.quantity }}</span>
+                        <div style="margin-left: 15%">
+                            {% for category in donation.categories.all %}
+                                <span>{{ category.name }}</span>
+                            {% endfor %}
+                        </div>
+                        <span>{{ donation.pick_up_date }}, {{ donation.pick_up_time }}</span>
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endblock %}

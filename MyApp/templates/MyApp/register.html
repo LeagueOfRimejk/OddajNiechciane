@@ -1,0 +1,67 @@
+{% extends 'MyApp/__base__.html' %}
+    {% block content %}
+
+        <style>
+
+        section.login-page div.register-errors {
+            margin-top: 15px;
+            font-size: 1.7rem;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+            border-left: 1px solid black;
+            padding: 20px;
+        }
+
+        </style>
+    <header>
+
+        <!-- Login/Register navbar -->
+        {% include 'MyApp/components/navbar_component.html' %}
+
+    </header>
+
+    <section class="login-page">
+      <h2>Załóż konto</h2>
+
+        <div style="width: 100%; display: flex; justify-content: center">
+
+              <div style="margin-top: 30px;">
+              {% if messages %}
+                {% for message in messages %}
+
+                  <div class="register-errors">
+                    {{ message }}
+                  </div>
+
+                  {% endfor %}
+              {% endif %}
+              </div>
+
+              <form action="" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                  <input type="text" name="name" placeholder="Imię" />
+                </div>
+                 <div class="form-group">
+                  <input type="text" name="surname" placeholder="Nazwisko" />
+                </div>
+                <div class="form-group">
+                  <input type="email" name="email" placeholder="Email" />
+                </div>
+                <div class="form-group">
+                  <input type="password" name="password" placeholder="Hasło" />
+                </div>
+                <div class="form-group">
+                  <input type="password" name="password2" placeholder="Powtórz hasło" />
+                </div>
+
+                <div class="form-group form-group--buttons">
+                  <a href="{% url 'login' %}" class="btn btn--without-border">Zaloguj się</a>
+                  <button class="btn" type="submit">Załóż konto</button>
+                </div>
+
+              </form>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'MyApp/__base__.html' %}
+    {% block content %}
+
+        {% include 'MyApp/components/navbar_component.html' %}
+        <div class="slogan container container--90" style="align-items: start;">
+            <div class="slogan--item">
+                <h1>
+                    Twój Profil
+                </h1>
+
+                <div>
+                    <h1 style="text-align: left">
+                        Nazwisko<br>
+                        <div style="text-align: center">{{ request.user.last_name }}</div>
+                    </h1>
+                </div>
+
+                <div>
+                    <h1 style="text-align: left">
+                        Imię<br>
+                        <div style="text-align: center">{{ request.user.first_name }}</div>
+                    </h1>
+                </div>
+
+                <div>
+                    <h1 style="text-align: left">
+                        Email<br>
+                        <div style="text-align: center">{{ request.user.email }}</div>
+                    </h1>
+                </div>
+
+            </div>
+
+
+      </div>
+    {% endblock %}

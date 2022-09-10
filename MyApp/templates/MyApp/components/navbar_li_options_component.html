@@ -1,0 +1,22 @@
+{% if display_login_register_navbar %}
+    <!-- Login/Register Navbar. -->
+    <ul>
+      <li><a href="{% url 'landing-page' %}">Start</a></li>
+      <li><a href="{% url 'landing-page' %}#steps">O co chodzi?</a></li>
+      <li><a href="{% url 'landing-page' %}#about-us">O nas</a></li>
+      <li><a href="{% url 'landing-page' %}#help">Fundacje i organizacje</a></li>
+      <li><a href="{% url 'landing-page' %}#contact">Kontakt</a></li>
+    </ul>
+
+{% else %}
+    <!-- Landing page/form Navbar. -->
+    <ul>
+        <li><a href="{% url 'landing-page' %}" class="btn btn--without-border active">Start</a></li>
+        <li><a href="{% url 'landing-page' %}#steps" class="btn btn--without-border">O co chodzi?</a></li>
+        <li><a href="{% url 'landing-page' %}#about-us" class="btn btn--without-border">O nas</a></li>
+        <li><a href="{% url 'landing-page' %}#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
+        {% if not display_donation %}<li><a href="{% url 'add-donation' %}#donation" class="btn btn--without-border">Przekaż dary</a></li>{% endif %}
+        <li><a href="{% url 'landing-page' %}#contact" class="btn btn--without-border">Kontakt</a></li>
+    </ul>
+
+{% endif %}
